@@ -69,14 +69,68 @@ RUN;
 ```
 We now have one table with 3 columns rather than a table of 8 columns, it is now easire to read and divide. \
 
+ **For question 1** \
+ We are only interested in the hair growth data between luxuriant and placebo, so we will use a smaller table only describing these values.
+ 
+```
+/* KEEPING ONLY DATA FOR PLACEBO AND LUXURIANT */
+DATA WORK.QUESTION1;
+SET WORK.cleanData;
+KEEP HairGrowth GROUP;
+/* KEEP ROWS THAT ARE TREATMENTS FROM LUXURIANT OF PLACEBO */
+	WHERE GROUP="LUXURIANT" OR GROUP="PLACEBO";
+RUN;
 
+```
+We now can fit a simple linear model comparing the factor value of group of treatment. \
+```
+/* FIT A LINEAR MODEL USING THE GROUP AS FACTOR, TO SEE HOW GOOD A TREATMENT IS */
+/* OUR P-VALUE WILL CHECK IF OUR TWO MEANS ARE EQUALL. IF NOT EQUAL, THA ONE WITH 
+HIGHEST MEAN IS THE BST */
+PROC GLM DATA = WORK.QUESTION1;
+	  CLASS GROUP;
+	  MODEL HairGrowth = GROUP;
+RUN;
+QUIT;
+```
+ 
+ \
+ 
+```
+```
+
+ **For Question 2**
+ \
+
+```
+
+```
+
+ *For Question 3*
+ \
+
+```
+
+```
+ \
+
+```
+
+```
+ \
+
+```
+
+```
 
 
 
 ## Results
-<!-- results clearly explained and presented (includes data visualisation-->
+<!-- results clearly explained and presented (includes data visualization-->
 
-
+#### Is there an effect of Luxuriant above and beyond the placebo
+#### Is Luxuriant more effective than the existing treatments on the market
+#### Is age relevant to any effect?
 
 
 ## Conclusions
