@@ -18,9 +18,11 @@ We will be testing a new drug called Luxuriant that treats hair baldness. We hav
 Random trials were constructed by more or less bald human. A random split of 4 groups was made, each group was allocated to different drug treatment. First of all, before applying the treatment, all of our subjects had shaved their hair. They then applied the drug treatment for a month, we then measured the hair growth of each individual. The data collection after a month of trial will be analyzed to better understand the effects of the new drug comparing with the existing ones. \
 
 ## Analysis Descritpion
+
+#### Data Wrangling and Formatting of data
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
 We first need to fix the data in an appropriate format to apply our statistical analysis with data visualization. \
-We first break the large dataset, to 4 individual smaller ones. Each individual dataset corresponds to their treatment and holds data concerning the hair growth and age of the subjects. We sort all the tables by age. We converted the hair growth measurements from inches to mm for all the tables, formula was obtained from [https://www.asknumbers.com/inches-to-mm.aspx](here) . \
+We first break the large dataset, to 4 individual smaller ones. Each individual dataset corresponds to their treatment and holds data concerning the hair growth and age of the subjects. We sort all the tables by hair growth. We converted the hair growth measurements from inches to mm for all the tables, formula was obtained from [https://www.asknumbers.com/inches-to-mm.aspx](here) . \
 ```
 /* FUNCTION THAT GETS 5 ARGUMENTS (data,column hair growht, column age, inches to mm formula, treatment used) */
 /* Breaks the data table to smaller individual table concerning only 1 treatment. */
@@ -56,6 +58,17 @@ RUN;
 
 %MEND;
 ```
+
+We will now combine our smaller individual tables to one table with 3 columns. Hair growth column holding the growth length of hair, the age of the subject and the treatment the subject was using. \
+```
+/* Merge tables all to one */
+DATA cleanData;
+MERGE WORK.LUXURIANT WORK.PLACEBO WORK.BALDBEGONE WORK.SKINHEADNOMORE ;
+BY HairGrowth;
+RUN;
+```
+We now have one table with 3 columns rather than a table of 8 columns, it is now easire to read and divide. \
+
 
 
 
