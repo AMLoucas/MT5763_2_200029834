@@ -14,15 +14,52 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
-    We will be testing a new drug called Luxuriant that treats hair baldness. We have collected vital data on the product outcomes from undertaking random trials, we have also used existing treatments in the trials to compare the different effects of each drug. \
-    Random trials were constructed by more or less bald human. A random split of 4 groups was made, each group was allocated to different drug treatment. First of all, before applying the treatment, all of our subjects had shaved their hair. They then applied the drug treatment for a month, we then measured the hair growth of each individual. The data collection after a month of trial will be analyzed to better understand the effects of the new drug comparing with the existing ones. \
+We will be testing a new drug called Luxuriant that treats hair baldness. We have collected vital data on the product outcomes from undertaking random trials, we have also used existing treatments in the trials to compare the different effects of each drug. \
+Random trials were constructed by more or less bald human. A random split of 4 groups was made, each group was allocated to different drug treatment. First of all, before applying the treatment, all of our subjects had shaved their hair. They then applied the drug treatment for a month, we then measured the hair growth of each individual. The data collection after a month of trial will be analyzed to better understand the effects of the new drug comparing with the existing ones. \
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
+We first need to fix the data in an appropriate format to apply our statistical analysis with data visualization. \
+We first break the large dataset, to 4 individual smaller ones. Each individual dataset corresponds to their treatment and holds data concerning the hair growth and age of the subjects. We sort all the tables by age. We converted the hair growth measurements from inches to mm for all the tables, formula was obtained from [https://www.asknumbers.com/inches-to-mm.aspx](here) . \
 ```
-PRODUCE CODE IN SAS FORMAT
+/* FUNCTION THAT GETS 5 ARGUMENTS (data,column hair growht, column age, inches to mm formula, treatment used) */
+/* Breaks the data table to smaller individual table concerning only 1 treatment. */
+/* Sorts each individual table by age */
+/* Data will be wrangled/tidy in here in correct format to apply statystical analysis on them */
+
+%MACRO breakTables(dataName, columnHair, columnAge, toMMmeasure, group);
+
+/* Creating individual table for each treatment */
+
+DATA WORK.&columnHair;
+SET WORK.&dataName;
+KEEP &columnHair &columnAge;
+/* Changin hair growth from inches to MM */
+&columnHair = &columnHair * &toMMmeasure;
+RUN;
+
+/* Renaming the age column to simple Age, Measure of hair growth to HairGrowth */
+/* Adding new column group that indicates for which treatments the data is (for mergeing tables later) */
+DATA WORK.&columnHair;
+SET WORK.&columnHair;
+RENAME &columnAge = Age;
+RENAME &columnHair = HairGrowth;
+GROUP = &group;
+RUN;
+
+/* Sorting the data according to the age of patient */
+PROC SORT DATA = WORK.&columnHair;
+BY Age;
+RUN;
+
+%web_open_table(WORK.&columnHair);
+
+%MEND;
 ```
-[https://www.asknumbers.com/inches-to-mm.aspx](inches to mm)
+
+
+
+
 ## Results
 <!-- results clearly explained and presented (includes data visualisation-->
 
