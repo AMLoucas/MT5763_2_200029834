@@ -1,6 +1,7 @@
 ---
 title: "MT5763_2_200029834"
 output: html_document
+indent: true
 ---
 
 ```{r setup, include=FALSE}
@@ -13,14 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
-
+    We will be testing a new drug called Luxuriant that treats hair baldness. We have collected vital data on the product outcomes from undertaking random trials, we have also used existing treatments in the trials to compare the different effects of each drug. \
+    Random trials were constructed by more or less bald human. A random split of 4 groups was made, each group was allocated to different drug treatment. First of all, before applying the treatment, all of our subjects had shaved their hair. They then applied the drug treatment for a month, we then measured the hair growth of each individual. The data collection after a month of trial will be analyzed to better understand the effects of the new drug comparing with the existing ones. \
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
 ```
 PRODUCE CODE IN SAS FORMAT
 ```
-
+[https://www.asknumbers.com/inches-to-mm.aspx](inches to mm)
 ## Results
 <!-- results clearly explained and presented (includes data visualisation-->
 
