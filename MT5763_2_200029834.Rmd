@@ -337,7 +337,7 @@ RUN;
  
  **For Question 2** \
 
-  To accomplish questions 2 we will apply the same wrangling strategy as in question 1. We will firstly plot our data for our 3 groups in a box-plot. After we will apply a bootstrap algorithm on the 3 groups data to obtain confidence intervals of where the true mean lies for each group. We will compare our values and obtain our results. \
+  We will firstly plot our data for our 3 drugs in a box-plot. After we will apply a bootstrap algorithm on the 3 effects data to obtain confidence intervals of where the true mean of hair growth length lies for each drug. \
 ```
 /* MT5763 */
 /* INDIVIDUAL PROJECT-1 */
@@ -470,6 +470,7 @@ RUN;
 %BootCI(WORK.BALDBEGONE);
 %BootCI(WORK.SKINHEADNOMORE);
 ```
+  We noticed as our box-plot, our confidence intervals have returned the same result. The Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
 
  *For Question 3* \
  
