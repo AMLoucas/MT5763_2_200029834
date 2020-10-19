@@ -14,14 +14,13 @@ This project used data collected from a clinical trial that was testing a new dr
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
-The aim of our report is to identify the efficiency of the Luxuriant drug against the other already existing ones. Using the data provided that was collected from the clinical trial of the drugs, we will modify our data in teh desired format and structure to apply statistical analyses on it and answer our questiosn. \
+The aim of our report is to identify the efficiency of the Luxuriant drug against the other already existing ones. Using the data provided that was collected from the clinical trial of the drugs, we will modify our data in teh desired format and structure to apply statistical analyses on it and answer our question. The SAS code used to achieve our desired results are included in the report with appropriate commenting of explanation. \
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
 #### For question 1 (Is there an effect of Luxuriant above and beyond the placebo?)
  We will tidy/wrangle our data up in an appropriate format and after apply a linear regression using as predictor the a factor variable of the groups 'Luxuriant' and 'PlaceBo'. Our response variable will be hair growth length in mm. \
  For our Data Wrangling we will first need to filter out the columns we are mostly interested [Luxuriant, PlaceBo]. We will then combine those two columns to one unique column that holds the hair growth length in mm and create a new column with name GROUP which will hold the group that the specific row is representing. Once we have evolved our data in the appropriate format we will apply the linear model to compare the means. \
-[ Comments are supplied in the code to explain every necessary step and the wrangling in detail.]
 ```
 /* MT5763 INDIVIDUAL-PROJECT 1 */
 /* Question 1 with Linear Regression. */
@@ -94,7 +93,6 @@ QUIT;
  * Ho: MEAN(LUXURIANT) = MEAN(PLACEBO)
  * H1: MEAN(LUXURIANT) > MEAN(PLACEBO)
 
-[ Comments are supplied in the code to explain every necessary step and the wrangling in detail.]
 ```
 /* QUESTION 1 */
 /* QUESTION 1 WITH RANDOMISATION TEST */
