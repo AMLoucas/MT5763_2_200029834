@@ -18,9 +18,11 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
+#### Data Wrangling
+  Our data is constructed by 8 columns and holds the age and hair growth length in inches for each drug and each patient. In our wrangling process we will break the big data set to 4 small individual ones holding the age and hair growth length in mm for only 1 drug We will then merge our tables and keep the column values (hair growth or age) that we are interested in. When merging we will add a new column to hold the value of which drug the specific row represents. This wrangling procedure will be the same for all the questions. \
+
 #### For question 1 (Is there an effect of Luxuriant above and beyond the placebo?)
- We will tidy/wrangle our data up in an appropriate format and after apply a linear regression using as predictor the a factor variable of the groups 'Luxuriant' and 'PlaceBo'. Our response variable will be hair growth length in mm. \
- For our Data Wrangling we will first need to filter out the columns we are mostly interested [Luxuriant, PlaceBo]. We will then combine those two columns to one unique column that holds the hair growth length in mm and create a new column with name GROUP which will hold the group that the specific row is representing. Once we have evolved our data in the appropriate format we will apply the linear model to compare the means. \
+  We now have our data in the appropriate format and structure to apply our analyzes. For the first question we are only interested in hair growth of drug Luxuriant against drug Placebo. We will apply a linear model using response variable Hair growth and predictor the drug.
 ```
 /* MT5763 INDIVIDUAL-PROJECT 1 */
 /* Question 1 with Linear Regression. */
@@ -87,12 +89,11 @@ PROC GLM
 RUN;
 QUIT;
 ```
- Once we applied our Linear model, we have noticed our assumptions are partially violated. Because our assumptions our violated we can not trust our p-values with certainty. For this reason we will apply a randomized test of the two means which does not have to follow any distribution assumptions. \
- We will apply a one tail Hypothesis test on our means to obtain our desired results:
+ Once we applied our Linear model, we have noticed our assumptions are violated, this means that our p-values are uncertain and may not be valid.. For this reason we will apply a randomized test on the two hair growth means of each drug, which does not have to follow any distribution assumptions. \
+  We will apply a one tail Hypothesis test on our means to obtain our desired results:
  
  * Ho: MEAN(LUXURIANT) = MEAN(PLACEBO)
  * H1: MEAN(LUXURIANT) > MEAN(PLACEBO)
-
 ```
 /* QUESTION 1 */
 /* QUESTION 1 WITH RANDOMISATION TEST */
@@ -332,10 +333,11 @@ DATA HypothesisResult;
 	WHERE RandomisedMean >= DIFFERENCE; 
 RUN;
 ```
-We can now use the compared means to obtain the proportional value we are interested in. To answer our questions. \
- **For Question 2**
- \
-To accomplish questions 2 we will apply the same wrangling strategy as in question 1. We will firstly plot our data for our 3 groups in a box-plot. After we will apply a bootstrap algorithm on the 3 groups data to obtain confidence intervals of where the true mean lies for each group. We will compare our values and obtain our results. \
+  Using our samples means and obtaining our proportional values, we conclude that Luxuriant is indeed a more efficient drug than placebo. \
+ 
+ **For Question 2** \
+
+  To accomplish questions 2 we will apply the same wrangling strategy as in question 1. We will firstly plot our data for our 3 groups in a box-plot. After we will apply a bootstrap algorithm on the 3 groups data to obtain confidence intervals of where the true mean lies for each group. We will compare our values and obtain our results. \
 ```
 /* MT5763 */
 /* INDIVIDUAL PROJECT-1 */
