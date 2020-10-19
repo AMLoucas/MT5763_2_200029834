@@ -338,7 +338,7 @@ RUN;
 We can now use the compared means to obtain the proportional value we are interested in. To answer our questions. \
  **For Question 2**
  \
-
+To accomplish questions 2 we will apply the same wrangling strategy as in question 1. We will firstly plot our data for our 3 groups in a box-plot. After we will apply a bootstrap algorithm on the 3 groups data to obtain confidence intervals of where the true mean lies for each group. We will compare our values and obtain our results. \
 ```
 /* MT5763 */
 /* INDIVIDUAL PROJECT-1 */
@@ -472,8 +472,8 @@ RUN;
 %BootCI(WORK.SKINHEADNOMORE);
 ```
 
- *For Question 3*
- \
+ *For Question 3* \
+ 
 
 ```
 
