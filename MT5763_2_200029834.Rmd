@@ -10,12 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Abstract
 <!-- executive summary -->
-This project used data collected from a clinical trial that was testing a new drugs for male pattern baldness. Our aim is to compare this new drug called Luxuriant against 3 already existing drugs Placebo, Baldbegone and Skinheadnomore. To achieve our aim we will use linear modeling in the appropriate manner in combination with randomization and bootstrapping tests. Using the confidence intervals from our randomized data-sets we concluded that Luxuriant is indeed a more efficient drug than Placebo but not from the Baldbegone and Skinheadnomore. Additionally regression testing was applied to understand the relation of har growth against the age of the subject. We can observe from our regression estimates, that age was not an important factor for the hair growth length of our patient.
+This project used data collected from a clinical trial that was testing a new drugs for male pattern baldness. Our aim is to compare this new drug called Luxuriant against 3 already existing drugs Placebo, Baldbegone and Skinheadnomore. To achieve our aim we will use linear modeling in the appropriate manner in combination with randomization and bootstrapping tests. Using the confidence intervals from our randomized data-sets we concluded that Luxuriant is indeed a more efficient drug than Placebo but not from the Baldbegone and Skinheadnomore. Additionally regression testing was applied to understand the relation of har growth against the age of the subject. We can observe from our regression estimates, that age was not an important factor for the hair growth length of our patient. \
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
-We will be testing a new drug called Luxuriant that treats hair baldness. We have collected vital data on the product outcomes from undertaking random trials, we have also used existing treatments in the trials to compare the different effects of each drug. \
-Random trials were constructed by more or less bald human. A random split of 4 groups was made, each group was allocated to different drug treatment. First of all, before applying the treatment, all of our subjects had shaved their hair. They then applied the drug treatment for a month, we then measured the hair growth of each individual. The data collection after a month of trial will be analyzed to better understand the effects of the new drug comparing with the existing ones. \
+The aim of our report is to identify the efficiency of the Luxuriant drug against the other already existing ones. Using the data provided that was collected from the clinical trial of the drugs, we will modify our data in teh desired format and structure to apply statistical analyses on it and answer our questiosn. \
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
