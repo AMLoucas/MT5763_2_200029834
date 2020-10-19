@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Abstract
 <!-- executive summary -->
-
+This project used data collected from a clinical trial that was testing a new drugs for male pattern baldness. Our aim is to compare this new drug called Luxuriant against 3 already existing drugs Placebo, Baldbegone and Skinheadnomore. To achieve our aim we will use linear modeling in the appropriate manner in combination with randomization and bootstrapping tests. Using the confidence intervals from our randomized data-sets we concluded that Luxuriant is indeed a more efficient drug than Placebo but not from the Baldbegone and Skinheadnomore. Additionally regression testing was applied to understand the relation of har growth against the age of the subject. We can observe from our regression estimates, that age was not an important factor for the hair growth length of our patient.
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
