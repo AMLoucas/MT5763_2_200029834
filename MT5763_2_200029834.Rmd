@@ -496,13 +496,14 @@ RUN;
 
 #### Is there an effect of Luxuriant above and beyond the placebo
 Yes.
-```
-knitr::include_graphics("TABLES-PLOTS/Q1-MODEL-BOXPLOT.pdf")
-```
-
-
+![Box-Plot of Luxuriant vs Placebo Hair Growth in MM Length](BOXPLOTS/Q1-BOXPLOT.png)
 #### Is Luxuriant more effective than the existing treatments on the market
+No.
+![Histogram of sample means simulated for Luxuriant data to pull 95% CI](HISTOGRAMS/Q2-HISTOGRAM(1).png)
 
+![Histogram of sample means simulated for Balbdegone data to pull 95% CI](HISTOGRAMS/Q2-HISTOGRAM(2).png)
+
+![Histogram of sample means simulated for Skinheadnomore data to pull 95% CI](HISTOGRAMS/Q2-HISTOGRAM(3).png)
 #### Is age relevant to any effect?
 
 
