@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Abstract
 <!-- executive summary -->
-This project used data collected from a clinical trial that was testing a new drugs for male pattern baldness. Our aim is to compare this new drug called Luxuriant against 3 already existing drugs Placebo, Baldbegone and Skinheadnomore. To achieve our aim we will use linear modeling in the appropriate manner in combination with randomization and bootstrapping tests. Using the confidence intervals from our randomized data-sets we concluded that Luxuriant is indeed a more efficient drug than Placebo but not from the Baldbegone and Skinheadnomore. Additionally regression testing was applied to understand the relation of har growth against the age of the subject. We can observe from our regression estimates, that age was not an important factor for the hair growth length of our patient. \
+This project used data collected from a clinical trial that was testing a new drug for male pattern baldness. Our aim is to compare this new drug called Luxuriant against 3 already existing drugs Placebo, Baldbegone and Skinheadnomore. To achieve our aim we will use linear modeling in the appropriate manner in combination with randomization and bootstrapping tests. Using the confidence intervals from our randomized data-sets we concluded that Luxuriant is indeed a more efficient drug than Placebo but not from the Baldbegone and Skinheadnomore. Additionally regression testing was applied to understand the relation of har growth against the age of the subject. We can observe from our regression estimates, that age was not an important factor for the hair growth length of our patient. \
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
@@ -22,7 +22,7 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
   Our data is constructed by 8 columns and holds the age and hair growth length in inches for each drug and each patient. In our wrangling process we will break the big data set to 4 small individual ones holding the age and hair growth length in mm for only 1 drug We will then merge our tables and keep the column values (hair growth or age) that we are interested in. When merging we will add a new column to hold the value of which drug the specific row represents. This wrangling procedure will be the same for all the questions. \
 
 #### For question 1 (Is there an effect of Luxuriant above and beyond the placebo?)
-  We now have our data in the appropriate format and structure to apply our analyzes. For the first question we are only interested in hair growth of drug Luxuriant against drug Placebo. We will apply a linear model using response variable Hair growth and predictor the drug.
+  We now have our data in the appropriate format and structure to apply our analyzes. For the first question we are only interested in hair growth of drug Luxuriant against drug Placebo. We will apply a linear model using response variable Hair growth and predictor the drug. \
 ```
 /* MT5763 INDIVIDUAL-PROJECT 1 */
 /* Question 1 with Linear Regression. */
@@ -473,7 +473,7 @@ RUN;
  From our box-plot and confidence interval histograms we notice that the Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
 
  *For Question 3* \
-  To check the importance of relation between Hair growth and age, we used a bootstrapping method to create random simulations data. Once we obtained the simulations, we fitted linear models as response Hair growth and predictors Age and Drug group as a factor. We will then pull our variables Age estimates and p-values to understand the relation.
+  To check the importance of relation between Hair growth and age, we used a bootstrapping method to create random simulations data. Once we obtained the simulations, we fitted linear models as response Hair growth and predictors Age and Drug group as a factor. We will then pull our variables Age estimates and p-values to understand the relation. \
 
 ```
 /* MT5763 */
@@ -663,5 +663,14 @@ TITLE;
 
 ## Conclusions
 <!-- conclusions along with criticisms of the design if any -->
+  Our new drug Luxuriant is an improvement from Placebo, but is still not as good as the other already existing drugs Skinheadnomore and Baldbegone. We have also understood that Age was not a factor on how efficient the drug was. We have used non-parametric methods to obtain our results, so our results are not dependent to any assumptions. For future trials we should consider taking more variables under consideration. Weight loss and iron deficiency and also affect hair loss, those variables should be monitors also [1]. Additionally their family tree should be tracked, hair-loss can be a family genetic symptom. Subjects may have weaker hair due to the fact of their family or hormones [2]. Another variable that we want to consider is if the patient is under any medication or supplements, some of these treatments can cause hair loss [2].
+  
+## References
+[1] NHS. (2018, January 04). Hair Loss. Retrieved from NHS: https://www.nhs.uk/conditions/hair-loss/ \
+[2] CLINIC, M. (n.d.). Hair Loss. Retrieved from MAYO CLINIC: https://www.mayoclinic.org/diseases-conditions/hair-loss/symptoms-causes/syc-20372926 \
+
+
+  
+  
 
 
