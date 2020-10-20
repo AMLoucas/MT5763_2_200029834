@@ -551,7 +551,6 @@ PROC SORT DATA=WORK.SKINHEADNOMORE;
 	BY GROUP;
 RUN;
 
-
 DATA WORK.MERGEDALL;
 	SET WORK.LUXURIANT WORK.PLACEBO WORK.BALDBEGONE WORK.SKINHEADNOMORE;
 	BY GROUP;
@@ -568,25 +567,67 @@ PROC SURVEYSELECT
 	method=urs noprint sampsize=400 outhits rep=500;
 RUN;
 
+/* PUTTING GLM MODEL ON ALL REPLICATE SIMULATIONS */
+PROC GLM DATA=WORK.BOOTMERGED;
+	CLASS GROUP;
+	MODEL HairGrowth = AGE GROUP /solution clparm;
+	ODS output ParameterEstimates=parEstimates;
+	BY REPLICATE;
+RUN;
+QUIT;
+
+/* Keeping only values we are interested in */
+DATA WORK.parEstimates;
+	SET WORK.parEstimates;
+	WHERE Parameter="Age";
+	KEEP Estimate LowerCL UpperCL Probt;
+RUN;
+
+/* Obtaining the confidence intervals of the slope. */
+PROC SGPLOT data = WORK.parEstimates;
+	TITLE "RELATION OF HAIRGROWTH WITH AGE ACROSS ALL DRUGS.";
+	HISTOGRAM Estimate;
+RUN; 
+TITLE;
+
+/* Getting the p-values of all the models. */
+PROC UNIVARIATE 
+	data=WORK.parEstimates;
+	VAR Probt;
+	OUTPUT out=WORK.MEAN mean=MEAN;
+RUN;
+
+/* Making a bootstrap algorithm only for Luxuriant to se 
+	effect on that.
+	EACH SIMULATION WILL PRODUCE 100 RADNOM ROWS, SIMULATION 
+	WILL BE EXECUTED 1000 TIMES. */
+PROC SURVEYSELECT 
+	data=WORK.LUXURIANT
+	out=WORK.LUXURIANT_BOOT seed=23434
+	method=urs noprint sampsize=100 outhits rep=1000;
+RUN;
+
 /* Fit regression lines to extract the slope of the linear relation
 	to understand what realtion exists between the 2 variables. */
 PROC REG 
-	DATA=WORK.BOOTMERGED OUTEST=BootResults NOPRINT;
+	DATA=WORK.LUXURIANT_BOOT OUTEST=WORK.LUX_REG NOPRINT;
 	MODEL HairGrowth = Age;
 	BY replicate;
 RUN;
 
 /* Obtaining the confidence intervals of the slope. */
 PROC UNIVARIATE 
-	data=BootResults;
+	data=WORK.LUX_REG;
 	VAR Age;
-	OUTPUT out=inteceptResults pctlpts=2.5, 97.5 pctlpre=CI;
+	OUTPUT out=WORK.LUX_CI pctlpts=2.5, 97.5 pctlpre=CI;
 RUN;
 
 /* Plotting the Confidence intervals in a histogram. */
-PROC SGPLOT data = BootResults;
+PROC SGPLOT data = WORK.LUX_REG;
+	TITLE "LUXURIANT HAIR GROWTH RELATION WITH AGE";
 	HISTOGRAM Age;
-RUN;
+RUN; 
+TITLE;
 ```
  \
 

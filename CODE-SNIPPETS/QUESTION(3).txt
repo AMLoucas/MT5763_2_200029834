@@ -1,0 +1,152 @@
+/* MT5763 */
+/* INDIVIDUAL PROJECT-1 */
+/* QUESTION 3 WITH RANDOMISATION REGRESSSION */
+
+/* IMPORTING THE BALD CSV DATA */
+FILENAME REFFILE '/folders/myfolders/sasuser.v94/Practical-Individual/Baldy.csv';
+
+PROC IMPORT DATAFILE=REFFILE
+	DBMS=CSV
+	OUT=WORK.BALDq3;
+	GETNAMES=YES;
+RUN;
+
+PROC CONTENTS DATA=WORK.BALDq3; 
+RUN;
+
+/* BREAKING TABLES TO EACH GROUP AND MERGE THEM BACK TOGETHER. */
+
+/* Luxuriant table */
+DATA WORK.LUXURIANT;
+	SET WORK.baldq3;
+	GROUP = "LUXURIANT";
+	KEEP Luxuriant AgeLuxuriant GROUP; 
+	Luxuriant = Luxuriant * 25.4;
+	RENAME Luxuriant = HairGrowth;
+	RENAME AgeLuxuriant = Age;
+RUN;
+
+/* Placebo table */
+DATA WORK.PLACEBO;
+	SET WORK.baldq3;
+	GROUP = "PLACEBO";
+	KEEP Placebo AgePlacebo GROUP;
+	Placebo = Placebo * 25.4;
+	RENAME Placebo = HairGrowth;
+	RENAME AgePlacebo = Age;
+RUN;
+
+/* SKINHEADNOMORE TABLE */
+DATA WORK.SKINHEADNOMORE;
+	SET WORK.baldq3;
+	GROUP = "SKINHEADNOMORE";
+	KEEP Skinheadnomore AgeSkinheadnomore GROUP;
+	Skinheadnomore = Skinheadnomore * 25.4;
+	RENAME Skinheadnomore = HairGrowth;
+	RENAME AgeSkinheadnomore = Age;
+RUN;
+
+/* BALDBEGONE TABLE */
+DATA WORK.BALDBEGONE;
+	SET WORK.baldq3;
+	GROUP = "BALDBEGONE";
+	KEEP BaldBeGone AgeBaldbegone GROUP;
+	BaldBeGone = BaldBeGone * 25.4;
+	RENAME Baldbegone = HairGrowth;
+	RENAME AgeBaldbegone = Age;
+RUN;
+
+/* Sort all our individual tables by their group(drug)
+	So we can then merge all together and have 3 columns only
+	HairGrowth, Age, Group (Group indicates the drug that the specific
+	row/record has been tested with.) */
+PROC SORT DATA=WORK.LUXURIANT;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.PLACEBO;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.BALDBEGONE;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.SKINHEADNOMORE;
+	BY GROUP;
+RUN;
+
+DATA WORK.MERGEDALL;
+	SET WORK.LUXURIANT WORK.PLACEBO WORK.BALDBEGONE WORK.SKINHEADNOMORE;
+	BY GROUP;
+RUN;
+
+/* BootStrapping data to fit models and obtain estimates
+	to understand relation of Age with Hair Growth.
+	Each simulation will construct a dataset of 400 rows.
+	The simulation will repeat 500 times. Simulation
+	is constructed by a random uniform distribution. */
+PROC SURVEYSELECT 
+	data=WORK.MERGEDALL
+	out=WORK.BOOTMERGED seed=23434
+	method=urs noprint sampsize=400 outhits rep=500;
+RUN;
+
+/* PUTTING GLM MODEL ON ALL REPLICATE SIMULATIONS */
+PROC GLM DATA=WORK.BOOTMERGED;
+	CLASS GROUP;
+	MODEL HairGrowth = AGE GROUP /solution clparm;
+	ODS output ParameterEstimates=parEstimates;
+	BY REPLICATE;
+RUN;
+QUIT;
+
+/* Keeping only values we are interested in */
+DATA WORK.parEstimates;
+	SET WORK.parEstimates;
+	WHERE Parameter="Age";
+	KEEP Estimate LowerCL UpperCL Probt;
+RUN;
+
+/* Obtaining the confidence intervals of the slope. */
+PROC SGPLOT data = WORK.parEstimates;
+	TITLE "RELATION OF HAIRGROWTH WITH AGE ACROSS ALL DRUGS.";
+	HISTOGRAM Estimate;
+RUN; 
+TITLE;
+
+/* Getting the p-values of all the models. */
+PROC UNIVARIATE 
+	data=WORK.parEstimates;
+	VAR Probt;
+	OUTPUT out=WORK.MEAN mean=MEAN;
+RUN;
+
+/* Making a bootstrap algorithm only for Luxuriant to se 
+	effect on that.
+	EACH SIMULATION WILL PRODUCE 100 RADNOM ROWS, SIMULATION 
+	WILL BE EXECUTED 1000 TIMES. */
+PROC SURVEYSELECT 
+	data=WORK.LUXURIANT
+	out=WORK.LUXURIANT_BOOT seed=23434
+	method=urs noprint sampsize=100 outhits rep=1000;
+RUN;
+
+/* Fit regression lines to extract the slope of the linear relation
+	to understand what realtion exists between the 2 variables. */
+PROC REG 
+	DATA=WORK.LUXURIANT_BOOT OUTEST=WORK.LUX_REG NOPRINT;
+	MODEL HairGrowth = Age;
+	BY replicate;
+RUN;
+
+/* Obtaining the confidence intervals of the slope. */
+PROC UNIVARIATE 
+	data=WORK.LUX_REG;
+	VAR Age;
+	OUTPUT out=WORK.LUX_CI pctlpts=2.5, 97.5 pctlpre=CI;
+RUN;
+
+/* Plotting the Confidence intervals in a histogram. */
+PROC SGPLOT data = WORK.LUX_REG;
+	TITLE "LUXURIANT HAIR GROWTH RELATION WITH AGE";
+	HISTOGRAM Age;
+RUN; 
+TITLE;
