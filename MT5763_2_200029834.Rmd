@@ -337,7 +337,7 @@ RUN;
  
  **For Question 2** \
 
-  We will firstly plot our data for our 3 drugs in a box-plot. After we will apply a bootstrap algorithm on the 3 effects data to obtain confidence intervals of where the true mean of hair growth length lies for each drug. \
+  First, we will plot our data in a box-plot. After we will apply a bootstrap algorithm on the 3 effects data to obtain confidence intervals of where the true mean of hair growth length lies for each drug. \
 ```
 /* MT5763 */
 /* INDIVIDUAL PROJECT-1 */
@@ -470,13 +470,123 @@ RUN;
 %BootCI(WORK.BALDBEGONE);
 %BootCI(WORK.SKINHEADNOMORE);
 ```
-  We noticed as our box-plot, our confidence intervals have returned the same result. The Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
+ From our box-plot and confidence interval histograms we notice that the Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
 
  *For Question 3* \
- 
+  what to do here?
 
 ```
+/* MT5763 */
+/* INDIVIDUAL PROJECT-1 */
+/* QUESTION 3 WITH RANDOMISATION REGRESSSION */
 
+/* IMPORTING THE BALD CSV DATA */
+FILENAME REFFILE '/folders/myfolders/sasuser.v94/Practical-Individual/Baldy.csv';
+
+PROC IMPORT DATAFILE=REFFILE
+	DBMS=CSV
+	OUT=WORK.BALDq3;
+	GETNAMES=YES;
+RUN;
+
+PROC CONTENTS DATA=WORK.BALDq3; 
+RUN;
+
+/* BREAKING TABLES TO EACH GROUP AND MERGE THEM BACK TOGETHER. */
+
+/* Luxuriant table */
+DATA WORK.LUXURIANT;
+	SET WORK.baldq3;
+	GROUP = "LUXURIANT";
+	KEEP Luxuriant AgeLuxuriant GROUP; 
+	Luxuriant = Luxuriant * 25.4;
+	RENAME Luxuriant = HairGrowth;
+	RENAME AgeLuxuriant = Age;
+RUN;
+
+/* Placebo table */
+DATA WORK.PLACEBO;
+	SET WORK.baldq3;
+	GROUP = "PLACEBO";
+	KEEP Placebo AgePlacebo GROUP;
+	Placebo = Placebo * 25.4;
+	RENAME Placebo = HairGrowth;
+	RENAME AgePlacebo = Age;
+RUN;
+
+/* SKINHEADNOMORE TABLE */
+DATA WORK.SKINHEADNOMORE;
+	SET WORK.baldq3;
+	GROUP = "SKINHEADNOMORE";
+	KEEP Skinheadnomore AgeSkinheadnomore GROUP;
+	Skinheadnomore = Skinheadnomore * 25.4;
+	RENAME Skinheadnomore = HairGrowth;
+	RENAME AgeSkinheadnomore = Age;
+RUN;
+
+/* BALDBEGONE TABLE */
+DATA WORK.BALDBEGONE;
+	SET WORK.baldq3;
+	GROUP = "BALDBEGONE";
+	KEEP BaldBeGone AgeBaldbegone GROUP;
+	BaldBeGone = BaldBeGone * 25.4;
+	RENAME Baldbegone = HairGrowth;
+	RENAME AgeBaldbegone = Age;
+RUN;
+
+/* Sort all our individual tables by their group(drug)
+	So we can then merge all together and have 3 columns only
+	HairGrowth, Age, Group (Group indicates the drug that the specific
+	row/record has been tested with.) */
+PROC SORT DATA=WORK.LUXURIANT;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.PLACEBO;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.BALDBEGONE;
+	BY GROUP;
+RUN;
+PROC SORT DATA=WORK.SKINHEADNOMORE;
+	BY GROUP;
+RUN;
+
+
+DATA WORK.MERGEDALL;
+	SET WORK.LUXURIANT WORK.PLACEBO WORK.BALDBEGONE WORK.SKINHEADNOMORE;
+	BY GROUP;
+RUN;
+
+/* BootStrapping data to fit models and obtain estimates
+	to understand relation of Age with Hair Growth.
+	Each simulation will construct a dataset of 400 rows.
+	The simulation will repeat 500 times. Simulation
+	is constructed by a random uniform distribution. */
+PROC SURVEYSELECT 
+	data=WORK.MERGEDALL
+	out=WORK.BOOTMERGED seed=23434
+	method=urs noprint sampsize=400 outhits rep=500;
+RUN;
+
+/* Fit regression lines to extract the slope of the linear relation
+	to understand what realtion exists between the 2 variables. */
+PROC REG 
+	DATA=WORK.BOOTMERGED OUTEST=BootResults NOPRINT;
+	MODEL HairGrowth = Age;
+	BY replicate;
+RUN;
+
+/* Obtaining the confidence intervals of the slope. */
+PROC UNIVARIATE 
+	data=BootResults;
+	VAR Age;
+	OUTPUT out=inteceptResults pctlpts=2.5, 97.5 pctlpre=CI;
+RUN;
+
+/* Plotting the Confidence intervals in a histogram. */
+PROC SGPLOT data = BootResults;
+	HISTOGRAM Age;
+RUN;
 ```
  \
 
