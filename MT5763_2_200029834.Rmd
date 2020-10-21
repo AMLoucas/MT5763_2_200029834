@@ -19,7 +19,7 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
 #### Data Wrangling
-  Our data is constructed by 8 columns and holds the age and hair growth length in inches for each drug and each patient. In our wrangling process we will break the big data set to 4 small individual ones holding the age and hair growth length in mm for only 1 drug We will then merge our tables and keep the column values (hair growth or age) that we are interested in. When merging we will add a new column to hold the value of which drug the specific row represents. This wrangling procedure will be the same for all the questions. \
+  Our data is constructed by 100 rows and 8 columns and holds the age and hair growth length in inches for each drug. In our wrangling process we will break the big data set to 4 individual ones holding the age and hair growth length in a converted measure mm for only 1 drug We will then merge our tables and keep the column (hair growth or age) that we are interested in. When merging we will add a new column GROUP that represents the drug used on the specific subject. This wrangling procedure will be the same for all the questions. \
 
 #### For question 1 (Is there an effect of Luxuriant above and beyond the placebo?)
   We now have our data in the appropriate format and structure to apply our analyzes. For the first question we are only interested in hair growth of drug Luxuriant against drug Placebo. We will apply a linear model using response variable Hair growth and predictor the drug. \
