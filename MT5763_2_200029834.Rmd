@@ -14,7 +14,7 @@ This project used data collected from a clinical trial that was testing a new dr
 
 ## Introduction
 <!-- describing the purpose of your investigation -->
-The aim of our report is to identify the efficiency of the Luxuriant drug against the other already existing ones. Using the data provided that was collected from the clinical trial of the drugs, we will modify our data in teh desired format and structure to apply statistical analyses on it and answer our question. The SAS code used to achieve our desired results are included in the report with appropriate commenting of explanation. \
+The aim of our report is to identify the efficiency of the Luxuriant drug against the other already existing ones. Using the data collected from the clinical trials, we will evolve our data in the desired format and structure to apply statistical analyses on it and answer our question. The SAS code used to achieve our results is included in the appendix with appropriate commenting. \
 
 ## Analysis Descritpion
 <!-- clear account of what you did statistically as well as the data wrangling,) and why -->
