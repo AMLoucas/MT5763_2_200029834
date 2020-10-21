@@ -23,6 +23,69 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
 
 #### For question 1 (Is there an effect of Luxuriant above and beyond the placebo?)
   We now have our data in the appropriate format and structure to apply our analyzes. For the first question we are only interested in hair growth of drug Luxuriant against drug Placebo. We will apply a linear model using response variable Hair growth and predictor the drug. \
+
+ Once we applied our Linear model, we have noticed our assumptions are violated, this means that our p-values are uncertain and may not be valid.. For this reason we will apply a randomized test on the two hair growth means of each drug, which does not have to follow any distribution assumptions. \
+  We will apply a one tail Hypothesis test on our means to obtain our desired results:
+ 
+ * Ho: MEAN(LUXURIANT) = MEAN(PLACEBO)
+ * H1: MEAN(LUXURIANT) > MEAN(PLACEBO)
+
+  Using our samples means and obtaining our proportional values, we conclude that Luxuriant is indeed a more efficient drug than placebo. \
+ 
+ **For Question 2** \
+
+  First, we will plot our data in a box-plot. After we will apply a bootstrap algorithm on the 3 effects data to obtain confidence intervals of where the true mean of hair growth length lies for each drug. \
+
+ From our box-plot and confidence interval histograms we notice that the Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
+
+ *For Question 3* \
+  To check the importance of relation between Hair growth and age, we used a bootstrapping method to create random simulations data. Once we obtained the simulations, we fitted linear models as response Hair growth and predictors Age and Drug group as a factor. We will then pull our variables Age estimates and p-values to understand the relation. \
+
+
+  We now have the estimates for age in the model including all drug groups and from another model that only uses age from Luxuriant grade. We notice the age is not an important in the subjects hair growth. \
+
+## Results
+<!-- results clearly explained and presented (includes data visualization-->
+
+#### [Q1] Is there an effect of Luxuriant above and beyond the placebo
+  From our Box-Plot we can conclude that Luxuriant is a lot more efficient than Placebo and by taking the p-value under consideration we know with certainty that our two means are not equal. \
+![Box-Plot of Luxuriant vs Placebo Hair Growth in MM Length](BOXPLOTS/Q1-BOXPLOT.png)
+ But because our assumptions are violated we will need to use a randomization test. We can view our violation of assumptions from our residual QQ-plot. \
+![QQ-Plot assumption violation](QQ-assumption/Q1-assumption.png)
+  Using our randomization test and comparing the original means with the randomized means difference. We view that there is not even a single mean difference more significant than our original which proves that Luxuriant hair growth length mean is larger. \
+  
+#### [Q2] Is Luxuriant more effective than the existing treatments on the market
+  From our box-plot we view that Luxuriant is not more efficient than the already existing drugs. We will further our analyzes using bootstrap algorithm to obtain the confidence intervals and compare them. \
+![Boxplot comparing all 3 drugs in terms of hair growth in mm.](BOXPLOTS/Q2-BOXPLOT.jpeg)
+  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs. The most efficient drug being Baldbegone. \
+
+![Histogram of sample means simulated for Luxuriant data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(1).png)
+
+![Histogram of sample means simulated for Balbdegone data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(2).png)
+
+![Histogram of sample means simulated for Skinheadnomore data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(3).png)
+  \
+  We can view by the histograms that the confidence intervals of Luxuriant Hair Growth mean can take the smallest values out of the three drugs. \
+
+#### [Q3] Is age relevant to any effect?
+  Using the model that considers all the drugs and implements the drug as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug in terms of hair growth length. \
+![Histogram of the models age estimation for all drugs.](HISTOGRAMS/Q3-All.png)
+  We also have an average of p-values 0.39 that proves that Age is not a significant variable. \
+  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age is not a significant variable. \
+![Histogram of the models age estimation for the Luxuriant drug.](HISTOGRAMS/Q3-Lux.png)
+
+## Conclusions
+<!-- conclusions along with criticisms of the design if any -->
+  Our new drug Luxuriant is an improvement from Placebo, but is still not as good as the other already existing drugs Skinheadnomore and Baldbegone. We have also understood that Age was not a factor on how efficient the drug was. We have used non-parametric methods to obtain our results, so our results are not dependent to any assumptions. For future trials we should consider taking more variables under consideration. Weight loss and iron deficiency and also affect hair loss, those variables should be monitors also [1]. Additionally their family tree should be tracked, hair-loss can be a family genetic symptom. Subjects may have weaker hair due to the fact of their family or hormones [2]. Another variable that we want to consider is if the patient is under any medication or supplements, some of these treatments can cause hair loss [2].
+  
+## References
+[1] NHS. (2018, January 04). Hair Loss. Retrieved from NHS: https://www.nhs.uk/conditions/hair-loss/ \
+[2] CLINIC, M. (n.d.). Hair Loss. Retrieved from MAYO CLINIC: https://www.mayoclinic.org/diseases-conditions/hair-loss/symptoms-causes/syc-20372926 \
+
+## Appendix
+
+#### Code For Question [1] with Linear Regression
+
 ```
 /* MT5763 INDIVIDUAL-PROJECT 1 */
 /* Question 1 with Linear Regression. */
@@ -89,11 +152,10 @@ PROC GLM
 RUN;
 QUIT;
 ```
- Once we applied our Linear model, we have noticed our assumptions are violated, this means that our p-values are uncertain and may not be valid.. For this reason we will apply a randomized test on the two hair growth means of each drug, which does not have to follow any distribution assumptions. \
-  We will apply a one tail Hypothesis test on our means to obtain our desired results:
- 
- * Ho: MEAN(LUXURIANT) = MEAN(PLACEBO)
- * H1: MEAN(LUXURIANT) > MEAN(PLACEBO)
+\
+
+#### Code For Question [1] with Randomisation test
+
 ```
 /* QUESTION 1 */
 /* QUESTION 1 WITH RANDOMISATION TEST */
@@ -333,11 +395,10 @@ DATA HypothesisResult;
 	WHERE RandomisedMean >= DIFFERENCE; 
 RUN;
 ```
-  Using our samples means and obtaining our proportional values, we conclude that Luxuriant is indeed a more efficient drug than placebo. \
- 
- **For Question 2** \
+\
 
-  First, we will plot our data in a box-plot. After we will apply a bootstrap algorithm on the 3 effects data to obtain confidence intervals of where the true mean of hair growth length lies for each drug. \
+#### Code For Question [2] with BootStrapping obtaining CI
+
 ```
 /* MT5763 */
 /* INDIVIDUAL PROJECT-1 */
@@ -470,10 +531,9 @@ RUN;
 %BootCI(WORK.BALDBEGONE);
 %BootCI(WORK.SKINHEADNOMORE);
 ```
- From our box-plot and confidence interval histograms we notice that the Luxuriant drug is not more efficient than the 2 already existing drugs, with most efficient drug being Baldbegone. \
+\
 
- *For Question 3* \
-  To check the importance of relation between Hair growth and age, we used a bootstrapping method to create random simulations data. Once we obtained the simulations, we fitted linear models as response Hair growth and predictors Age and Drug group as a factor. We will then pull our variables Age estimates and p-values to understand the relation. \
+#### Code For Question [3] with BootStrapping and obtainin CI
 
 ```
 /* MT5763 */
@@ -629,48 +689,4 @@ PROC SGPLOT data = WORK.LUX_REG;
 RUN; 
 TITLE;
 ```
-  We now have the estimates for age in the model including all drug groups and from another model that only uses age from Luxuriant grade. We notice the age is not an important in the subjects hair growth. \
-
-## Results
-<!-- results clearly explained and presented (includes data visualization-->
-
-#### [Q1] Is there an effect of Luxuriant above and beyond the placebo
-  From our Box-Plot we can conclude that Luxuriant is a lot more efficient than Placebo and by taking the p-value under consideration we know with certainty that our two means are not equal. \
-![Box-Plot of Luxuriant vs Placebo Hair Growth in MM Length](BOXPLOTS/Q1-BOXPLOT.png)
- But because our assumptions are violated we will need to use a randomization test. We can view our violation of assumptions from our residual QQ-plot. \
-![QQ-Plot assumption violation](QQ-assumption/Q1-assumption.png)
-  Using our randomization test and comparing the original means with the randomized means difference. We view that there is not even a single mean difference more significant than our original which proves that Luxuriant hair growth length mean is larger. \
-  
-#### [Q2] Is Luxuriant more effective than the existing treatments on the market
-  From our box-plot we view that Luxuriant is not more efficient than the already existing drugs. We will further our analyzes using bootstrap algorithm to obtain the confidence intervals and compare them. \
-![Boxplot comparing all 3 drugs in terms of hair growth in mm.](BOXPLOTS/Q2-BOXPLOT.jpeg)
-  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs. The most efficient drug being Baldbegone. \
-
-![Histogram of sample means simulated for Luxuriant data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(1).png)
-
-![Histogram of sample means simulated for Balbdegone data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(2).png)
-
-![Histogram of sample means simulated for Skinheadnomore data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(3).png)
-  \
-  We can view by the histograms that the confidence intervals of Luxuriant Hair Growth mean can take the smallest values out of the three drugs. \
-
-#### [Q3] Is age relevant to any effect?
-  Using the model that considers all the drugs and implements the drug as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug in terms of hair growth length. \
-![Histogram of the models age estimation for all drugs.](HISTOGRAMS/Q3-All.png)
-  We also have an average of p-values 0.39 that proves that Age is not a significant variable. \
-  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age is not a significant variable. \
-![Histogram of the models age estimation for the Luxuriant drug.](HISTOGRAMS/Q3-Lux.png)
-
-## Conclusions
-<!-- conclusions along with criticisms of the design if any -->
-  Our new drug Luxuriant is an improvement from Placebo, but is still not as good as the other already existing drugs Skinheadnomore and Baldbegone. We have also understood that Age was not a factor on how efficient the drug was. We have used non-parametric methods to obtain our results, so our results are not dependent to any assumptions. For future trials we should consider taking more variables under consideration. Weight loss and iron deficiency and also affect hair loss, those variables should be monitors also [1]. Additionally their family tree should be tracked, hair-loss can be a family genetic symptom. Subjects may have weaker hair due to the fact of their family or hormones [2]. Another variable that we want to consider is if the patient is under any medication or supplements, some of these treatments can cause hair loss [2].
-  
-## References
-[1] NHS. (2018, January 04). Hair Loss. Retrieved from NHS: https://www.nhs.uk/conditions/hair-loss/ \
-[2] CLINIC, M. (n.d.). Hair Loss. Retrieved from MAYO CLINIC: https://www.mayoclinic.org/diseases-conditions/hair-loss/symptoms-causes/syc-20372926 \
-
-
-  
-  
-
 
