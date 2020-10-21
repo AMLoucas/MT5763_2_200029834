@@ -39,16 +39,16 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
 <!-- results clearly explained and presented (includes data visualization-->
 
 #### [Q1] Is there an effect of Luxuriant above and beyond the placebo
-  From our Box-Plot we can conclude that Luxuriant is a lot more efficient than Placebo and by taking the p-value under consideration we know with certainty that our two means are not equal. \
+  From our Box-Plot we can conclude that Luxuriant is more efficient than Placebo and by taking the p-value under consideration we know with certainty that our two means are not equal. \
 ![Box-Plot of Luxuriant vs Placebo Hair Growth in MM Length](BOXPLOTS/Q1-BOXPLOT.png)
- But because our assumptions are violated we will need to use a randomization test. We can view our violation of assumptions from our residual QQ-plot. \
+ But because our assumptions are violated we will need to use a randomization test. We can view the violation of the normality assumptions from our residual QQ-plot. \
 ![QQ-Plot assumption violation](QQ-assumption/Q1-assumption.png)
-  Using our randomization test and comparing the original means with the randomized means difference. We view that there is not even a single mean difference more significant than our original which proves that Luxuriant hair growth length mean is larger. \
+  Using our randomization test and comparing the original means with the randomized means difference. We view that there is not any sample mean differences more significant than our original which proves that Luxuriant hair growth length mean is larger. Result table can be contructed by running the code, but has no rows. \
   
 #### [Q2] Is Luxuriant more effective than the existing treatments on the market
   From our box-plot we view that Luxuriant is not more efficient than the already existing drugs. We will further our analyzes using bootstrap algorithm to obtain the confidence intervals and compare them. \
 ![Boxplot comparing all 3 drugs in terms of hair growth in mm.](BOXPLOTS/Q2-BOXPLOT.jpeg)
-  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs. The most efficient drug being Baldbegone. \
+  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs, with most efficient drug being Baldbegone. \
 
 ![Histogram of sample means simulated for Luxuriant data to pull 95% CI.](HISTOGRAMS/Q2-HISTOGRAM(1).png)
 
@@ -59,10 +59,10 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
   We can view by the histograms that the confidence intervals of Luxuriant Hair Growth mean can take the smallest values out of the three drugs. \
 
 #### [Q3] Is age relevant to any effect?
-  Using the model that considers all the drugs and implements the drug as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug in terms of hair growth length. \
+  Using the model that considers all the drugs and implements the group as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug in terms of hair growth length. \
 ![Histogram of the models age estimation for all drugs.](HISTOGRAMS/Q3-All.png)
   We also have an average of p-values 0.39 that proves that Age is not a significant variable. \
-  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age is not a significant variable. \
+  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age is not a significant variable. In each simulation run we had positive and negative slope values. This shows that the age was not an influence. \
 ![Histogram of the models age estimation for the Luxuriant drug.](HISTOGRAMS/Q3-Lux.png)
 
 ## Conclusions
