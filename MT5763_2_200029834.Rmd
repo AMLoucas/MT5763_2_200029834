@@ -1,8 +1,15 @@
 ---
 title: "MT5763_2_200029834"
-output: html_document
-indent: true
+output:
+  pdf_document: default
+  html_document: default
+indent: yes
 ---
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
+
 ###### GitHub repository is: https://github.com/AMLoucas/MT5763_2_200029834
 
 ## Abstract
