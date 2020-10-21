@@ -45,15 +45,18 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
 #### [Q2] Is Luxuriant more effective than the existing treatments on the market
   From our box-plot we view that Luxuriant is not more efficient than the already existing drugs. We will further our analyzes using bootstrap algorithm to obtain the confidence intervals and compare them. \
 ![Boxplot comparing all 3 drugs in terms of hair growth in mm.](BOXPLOTS/Q2-BOXPLOT.jpeg)
-  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs, with most efficient drug being Baldbegone. \
+  Viewing the histograms of each drug and using the Confidence intervals, we conclude that indeed the Luxuriant drug is not more efficient than the already existing drugs, with most efficient drug being Baldbegone. From the confidence intervals, Luxuriant have the smallest hair growth value. \
+  
+| CI    	| LUXURIANT 	| BALDBEGONE 	| SKINHEADNOMORE 	|
+|-------	|-----------	|------------	|----------------	|
+| 2.5%  	| 11.5622   	| 32.4356    	| 16.6493        	|
+| 97.5% 	| 14.5700   	| 39.9387    	| 20.9198        	| \
 
 ![ ](HISTOGRAMS/Q2-HISTOGRAM(1).png)
 
 ![ ](HISTOGRAMS/Q2-HISTOGRAM(2).png)
 
 ![ ](HISTOGRAMS/Q2-HISTOGRAM(3).png)
-  \
-  We can view by the histograms that the confidence intervals of Luxuriant Hair Growth mean can take the smallest values out of the three drugs. \
 
 #### [Q3] Is age relevant to any effect?
   Using the model that considers all the drugs and implements the group as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug in terms of hair growth length. \
