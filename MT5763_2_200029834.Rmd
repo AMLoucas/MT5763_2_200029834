@@ -90,14 +90,14 @@ include_graphics("HISTOGRAMS/Q2-HISTOGRAM(3).png")
 
 ### [Q3] Is age relevant to any effect?
  
-  Using the model that considers all the drugs and implements the group as a factor in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug results in terms of hair growth length. \
+  Using the model that considers all the drugs in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug results in terms of hair growth length. \
 ```{r, echo=FALSE}
 # All defaults
 include_graphics("HISTOGRAMS/Q3-All.png")
 ```
 
   We also have an average of Age P-Values 0.39 that indicates that Age is not a significant variable.  \
-  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age does not affect the drug results. In each simulation applied, our Age estimate was changing from neagtive to positive in a random way and most of the times it was close to 0 (can be viewed in the below Histogram). This indicates that the age was not an influence. \
+  We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age does not affect the drug results. \
 ```{r, echo=FALSE}
 # All defaults
 include_graphics("HISTOGRAMS/Q3-Lux.png")
@@ -107,7 +107,7 @@ include_graphics("HISTOGRAMS/Q3-Lux.png")
 ## Conclusions
 
 <!-- conclusions along with criticisms of the design if any -->
-  Our new drug Luxuriant is an improvement from Placebo, but is still not more efficient than the drugs Skinheadnomore and Baldbegone. We have also understood that Age was not significant on how efficient the drug was. To improve Luxuriant drug we first must understand what variables affect the results. Since this trial considered only the age of the subject, we could not further investigate what affects the drug in terms of Hair growth. For future trials we should consider recording more variables, weight loss and iron deficiency affect hair loss, those variables should be monitored and analyzed [1]. Additionally, subjects may have weaker hair due to the fact of their family or hormones, these phenomena should be recorded and taken under consideration when applying the drug [2]. A subject that was bald and he had a family tree of "weak hair" will have a smaller improvement than others. Another variable to consider is, if the patient is under any other medication or supplements, some of these treatments can cause hair loss and affect the drug being testes [2]. \
+  Our new drug Luxuriant is an improvement from Placebo, but is still not more efficient than the drugs Skinheadnomore and Baldbegone. We have also understood that Age was not significant on how efficient the drug was. To improve Luxuriant drug we first must understand what variables affect the results. Since this trial considered only the age of the subject, we could not further investigate what affects the drug in terms of Hair growth. For future trials we should consider recording more variables, weight loss and iron deficiency affect hair loss, those variables should be monitored and analyzed [1]. Additionally, subjects may have weaker hair due to the fact of their family or hormones, these phenomena should be taken under consideration [2]. Another variable to consider is, if the patient is under any other medication or supplements, some of these treatments can affect the drug results[2]. ¬¬ \
     Number of simulation used was 500 and 1000 in different simulations, by increasing the simulation N values we will obtain results closer to the true values. \
   
 ## References
