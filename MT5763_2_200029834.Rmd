@@ -1,9 +1,7 @@
 ---
 title: "MT5763_2_200029834"
-output:
-  pdf_document: default
-  html_document: default
-indent: yes
+output: pdf_document
+author: 200029834
 ---
 
 ```{r, include=FALSE}
@@ -48,18 +46,17 @@ The aim of our report is to identify the efficiency of the Luxuriant drug agains
   All the columns are in our interest in this question. To check the relation between Hair growth and age, we used a bootstrapping method to create random simulated data. Once we obtained the simulations, we fitted a linear model (HairGrowth = Age FACTOR(GROUP)) for each simulation . We will then obtain our Age estimates and p-values to understand the relation. From our estimates we obtain a 95% confidence interval, if 0 is in the interval returned, this means our slope is a straight line and age is not a significant variable on Hair growth. We will also run the same test considering only the Luxuriant group. Large p-values indicates that the predictor is not important. \
 
 ## Results
- 
 <!-- results clearly explained and presented (includes data visualization-->
 
 ### [Q1] Is there an effect of Luxuriant above and beyond the placebo
- 
   From our Box-Plot we can conclude that Luxuriant is more efficient than Placebo, the p-value that the model produced indicates that the two means of hair growth are not equal. \
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("BOXPLOTS/Q1-BOXPLOT.png")
 ```
+
  But because our assumptions are violated we will need to use a randomization test. We can view the violation of the normality assumptions from our residual QQ-plot. \
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("QQ-assumption/Q1-assumption.png")
 ```
@@ -68,7 +65,7 @@ include_graphics("QQ-assumption/Q1-assumption.png")
 ### [Q2] Is Luxuriant more effective than the existing treatments on the market
 
   From our box-plot we view that Luxuriant is not more efficient than the already existing drugs. We will further our analyzes using bootstrap algorithm to obtain the means 95% confidence intervals and compare them. \
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("BOXPLOTS/Q2-BOXPLOT.jpeg")
 ```
@@ -81,7 +78,7 @@ include_graphics("BOXPLOTS/Q2-BOXPLOT.jpeg")
 | 97.5% 	| 14.5700   	| 39.9387    	| 20.9198        	| 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("HISTOGRAMS/Q2-HISTOGRAM(1).png")
 include_graphics("HISTOGRAMS/Q2-HISTOGRAM(2).png")
@@ -91,14 +88,14 @@ include_graphics("HISTOGRAMS/Q2-HISTOGRAM(3).png")
 ### [Q3] Is age relevant to any effect?
  
   Using the model that considers all the drugs in the model. We can view from the histogram below that the model estimates contain the value 0. This shows that Age does not affect the drug results in terms of hair growth length. \
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("HISTOGRAMS/Q3-All.png")
 ```
 
   We also have an average of Age P-Values 0.39 that indicates that Age is not a significant variable.  \
   We now apply a model only concerning the drug Luxuriant. Having a simple model Hair growth = Age. Our estimation histograms contains again the value 0 which proves that Age does not affect the drug results. \
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center',  out.width="70%", out.height="70%"}
 # All defaults
 include_graphics("HISTOGRAMS/Q3-Lux.png")
 ```
@@ -107,7 +104,7 @@ include_graphics("HISTOGRAMS/Q3-Lux.png")
 ## Conclusions
 
 <!-- conclusions along with criticisms of the design if any -->
-  Our new drug Luxuriant is an improvement from Placebo, but is still not more efficient than the drugs Skinheadnomore and Baldbegone. We have also understood that Age was not significant on how efficient the drug was. To improve Luxuriant drug we first must understand what variables affect the results. Since this trial considered only the age of the subject, we could not further investigate what affects the drug in terms of Hair growth. For future trials we should consider recording more variables, weight loss and iron deficiency affect hair loss, those variables should be monitored and analyzed [1]. Additionally, subjects may have weaker hair due to the fact of their family or hormones, these phenomena should be taken under consideration [2]. Another variable to consider is, if the patient is under any other medication or supplements, some of these treatments can affect the drug results[2]. ¬¬ \
+  Our new drug Luxuriant is an improvement from Placebo, but is still not more efficient than the drugs Skinheadnomore and Baldbegone. We have also understood that Age was not significant on how efficient the drug was. To improve Luxuriant drug we first must understand what variables affect the results. Since this trial considered only the age of the subject, we could not further investigate what affects the drug in terms of Hair growth. For future trials we should consider recording more variables, weight loss and iron deficiency affect hair loss, those variables should be monitored and analyzed [1]. Additionally, subjects may have weaker hair due to the fact of their family or hormones, these phenomena should be taken under consideration [2]. Another variable to consider is, if the patient is under any other medication or supplements, some of these treatments can affect the drug results[2]. Additionally, it would be better to consider only completely bald subjects, since the random allocation might influence the results. There is a possibility subjects thar were not completely bald were allocated in one drug. \
     Number of simulation used was 500 and 1000 in different simulations, by increasing the simulation N values we will obtain results closer to the true values. \
   
 ## References
